@@ -16,13 +16,14 @@ To save time on the initial setup, a CloudFormation template will be used to cre
 In this workshop, you will deploy the following:
 
 An AWS CloudFormation stack, which will include:
-1. An Amazon Virtual Private Cloud (Amazon VPC) 
-2. VPC Endpoint for Elastic Inference accelerator
-3. Elastic Inference accelerator
-4. Supporting IAM policies and roles
-5. Supporting security groups
-6. An Amazon EC2 Launch Template
-7. An Amazon EC2 fleet to deploy EC2 Spot instance(s)
+
+* An Amazon Virtual Private Cloud (Amazon VPC) 
+* An Amazon Elastic Inference accelerator
+* VPC Endpoint for Amazon Elastic Inference accelerator
+* Supporting IAM policies and roles
+* Supporting security groups
+* An Amazon EC2 Launch Template
+* An Amazon EC2 fleet to deploy EC2 Spot instance(s)
 
 Here is a diagram of the resulting architecture:
 
