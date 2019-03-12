@@ -1,19 +1,13 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Running Elastic Inference - workshop template
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
 Mappings:
   CidrMappings:
     public-subnet:
       CIDR: 10.0.1.0/24
     vpc:
       CIDR: 10.0.0.0/16
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
 Metadata:
   Author:
     Description: Chakravarthy Nagarajan <chakravn@amazon.com>
@@ -31,107 +25,71 @@ Metadata:
       on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
       express or implied. See the License for the specific language governing
       permissions and limitations under the License.
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
 Outputs:
   awsRegionId:
     Description: The AWS Region ID your template was launched in
     Value:
       Ref: 'AWS::Region'
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   publicSubnet:
     Description: Public subnet
     Value:
       Ref: publicSubnet
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   snsTopic:
     Description: SNS topic ARN
     Value:
       Ref: snsTopic
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   vpc:
     Description: The VPC
     Value:
       Ref: vpc
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   vpcEndpoint:
     Description: VPC Endpoint for EI accelerator
     Value:
       Ref: vpcEndpoint
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   eventRule:
     Description: Events rule
     Value:
       Ref: eventRule
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   snsTopic:
     Description: SNS topic ARN
     Value:
       Ref: snsTopic
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   instanceSecurityGroup:
     Description: Instance security group
     Value:
       Ref: instanceSecurityGroup
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   eventRule:
     Description: Events rule
     Value:
       Ref: eventRule
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   instanceProfile:
     Description: Instance profile ARN
     Value:
       Fn::GetAtt:
       - instanceProfile
       - Arn
-<<<<<<< HEAD
 
   instanceRole:
     Description: Instance Role
     Value:
       Ref: instanceRole
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
 Parameters:
   sourceCidr:
     Default: 0.0.0.0/0
     Description: Optional - CIDR/IP range for instance ssh/http access access
     Type: String
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
 Resources:
   attachGateway:
     DependsOn:
@@ -143,19 +101,13 @@ Resources:
       VpcId:
         Ref: vpc
     Type: 'AWS::EC2::VPCGatewayAttachment'
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   ec2FleetServiceLinkedRole:
     Properties:
       AWSServiceName: ec2fleet.amazonaws.com
       Description: Default EC2 Fleet Service Linked Role
     Type: 'AWS::IAM::ServiceLinkedRole'
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   eventRule:
     DependsOn:
     - snsTopic
@@ -175,26 +127,12 @@ Resources:
           - snsTopic
           - TopicName
     Type: AWS::Events::Rule
-<<<<<<< HEAD
 
   instanceRole:
     Description: Instance Role for EI
     Properties:
       AssumeRolePolicyDocument:
         Version: "2012-10-17"
-=======
-  instanceProfile:
-    DependsOn:
-      - instanceRole
-    Properties:
-      Path: /
-      Roles:
-        - Ref: "instanceRole"
-    Type: "AWS::IAM::InstanceProfile"
-  instanceRole:
-    Properties:
-      AssumeRolePolicyDocument:
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
         Statement:
           -
             Effect: "Allow"
@@ -204,7 +142,6 @@ Resources:
             Action:
               - "sts:AssumeRole"
       Path: "/"
-<<<<<<< HEAD
       RoleName: "EI-Spot"
     Type: "AWS::IAM::Role"
 
@@ -212,12 +149,6 @@ Resources:
     Description: "Policy for Elastic Inference"
     Properties:
       ManagedPolicyName: "ec2-role-trust-policy"
-=======
-    Type: "AWS::IAM::Role"
-  instancePolicy:
-    Properties:
-      PolicyName: "ec2-role-trust-policy"
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
       PolicyDocument:
         Version: "2012-10-17"
         Statement:
@@ -231,7 +162,6 @@ Resources:
               - 'ec2:Get*'
             Resource: "*"
       Roles:
-<<<<<<< HEAD
         - Ref: "instanceRole"
     Type: "AWS::IAM::ManagedPolicy"
 
@@ -243,11 +173,6 @@ Resources:
       InstanceProfileName: "EI-Spot"
     Type: "AWS::IAM::InstanceProfile"
 
-=======
-        -
-          Ref: "instanceRole"
-    Type: "AWS::IAM::Policy"
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   instanceSecurityGroup:
     DependsOn:
       - vpc
@@ -259,7 +184,6 @@ Resources:
           FromPort: 22
           IpProtocol: tcp
           ToPort: 22
-<<<<<<< HEAD
         - CidrIp:
             Ref: sourceCidr
           FromPort: 443
@@ -269,21 +193,6 @@ Resources:
         Ref: vpc
     Type: 'AWS::EC2::SecurityGroup'
 
-=======
-      VpcId:
-        Ref: vpc
-    Type: 'AWS::EC2::SecurityGroup'
-  instanceSecurityGroupIngress:
-    DependsOn:
-      - instanceSecurityGroup
-    Properties:
-      FromPort: 443
-      ToPort: 443
-      GroupId:
-        Ref: instanceSecurityGroup
-      IpProtocol: tcp
-    Type: 'AWS::EC2::SecurityGroupIngress'
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   vpcEndpoint:
     DependsOn:
       - vpc
@@ -293,27 +202,18 @@ Resources:
       VpcId: !Ref vpc
       ServiceName: !Sub 'com.amazonaws.${AWS::Region}.elastic-inference.runtime'
       VpcEndpointType: 'Interface'
-<<<<<<< HEAD
       PrivateDnsEnabled: true
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
       SubnetIds:
         - Ref: publicSubnet
       SecurityGroupIds:
         - Ref: instanceSecurityGroup
     Type: AWS::EC2::VPCEndpoint
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   internetGateway:
     DependsOn:
       - vpc
     Type: 'AWS::EC2::InternetGateway'
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   publicSubnet:
     DependsOn: attachGateway
     Properties:
@@ -334,10 +234,7 @@ Resources:
       VpcId:
         Ref: vpc
     Type: AWS::EC2::Subnet
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   publicRoute:
     DependsOn:
       - publicRouteTable
@@ -350,10 +247,7 @@ Resources:
       RouteTableId:
         Ref: publicRouteTable
     Type: 'AWS::EC2::Route'
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   publicRouteTable:
     DependsOn:
       - vpc
@@ -365,7 +259,6 @@ Resources:
       VpcId:
         Ref: vpc
     Type: 'AWS::EC2::RouteTable'
-<<<<<<< HEAD
 
   publicSubnet1RouteTableAssociation:
     DependsOn:
@@ -379,16 +272,11 @@ Resources:
         Ref: publicSubnet
     Type: AWS::EC2::SubnetRouteTableAssociation
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   snsTopic:
     Properties:
       DisplayName: SNS Topic for EC2 Spot Instance Interruption Notices
     Type: AWS::SNS::Topic
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   snsTopicPolicy:
     DependsOn:
     - snsTopic
@@ -410,10 +298,7 @@ Resources:
       Topics:
       - Ref: snsTopic
     Type: AWS::SNS::TopicPolicy
-<<<<<<< HEAD
 
-=======
->>>>>>> a9b1aae82201851ad741900b32ddf8ec2436676d
   vpc:
     Properties:
       CidrBlock:
