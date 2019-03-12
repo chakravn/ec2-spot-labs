@@ -23,6 +23,7 @@ An AWS CloudFormation stack, which will include:
 7. An Amazon EC2 fleet to deploy EC2 Spot instance(s)
 
 Here is a diagram of the resulting architecture:
+
 ![](images/arch.jpg)
 
 **Let's Begin**
