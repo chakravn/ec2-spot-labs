@@ -104,6 +104,8 @@ You'll use a launch template to specify configuration parameters for launching i
 | **%instanceSecurityGroup%**                                | InstanceSecurityGroup created y CloudFormation stack. For example, “sg-XXXXXXXXXXXXXX” |
 | **InstanceType, ElasticInferenceAccelerators and ImageId** | The provided launch template has some default values for InstanceType, ElasticInferenceAccelerators and ImageId. But please feel free to update them if required.  |
 
+**Note: The ImageId provided in this workshop is one of the "Deep Learning AMI" from us-east-2 region. Please update the ImageId according to the Region/User specific requirements.**
+
 3.	Save the File.
 4.	Create the launch template from the launch template config you just saved:
 ```
