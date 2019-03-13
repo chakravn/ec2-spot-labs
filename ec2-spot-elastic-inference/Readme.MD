@@ -149,14 +149,16 @@ aws ec2 describe-fleet-history --fleet-id $FLEETID --start-time 2019-03-01
 
 ![](images/instance.jpg)
 
-4.	Note down the Public DNS(IPV4) and connect using your SSH key pair with your SSH client as below
+4. Note down the Public DNS(IPV4) and connect using your SSH key pair with your SSH client as below
 
 ![](images/connect.jpg)
-5.	Once you logon to the instance, do yum update as follows..
+
+
+5. Once you logon to the instance, do yum update as follows..
 ```
 [ec2-user@ip-XX-X-X-XXX ~]$ sudo yum -y update
 ```
-6.	Validate the Elastic Inference Setup by running “python ~/anaconda3/bin/EISetupValidator.py” and the expected response should be as below.
+6. Validate the Elastic Inference Setup by running “python ~/anaconda3/bin/EISetupValidator.py” and the expected response should be as below.
 ```
 [ec2-user@ip-XX-X-X-XXX ~]$ python ~/anaconda3/bin/EISetupValidator.py
 ```
@@ -164,11 +166,11 @@ Expected Output:
 ```
 All the validation checks passed for Amazon EI from this instance - <instance-ID>
 ```
-7.	Activate the “amazonei_mxnet_p36” source as below
+7. Activate the “amazonei_mxnet_p36” source as below
 ```
 [ec2-user@ip-XX-X-X-XXX ~]$ source activate amazonei_mxnet_p36
 ```
-8.	Download some sample images for inferencing as below using “wget”
+8. Download some sample images for inferencing as below using “wget”
 ```
 (amazonei_mxnet_p36) [ec2-user@ip-XX-X-X-XXX ~]$ wget -O dog.jpg 'https://github.com/dmlc/web-data/blob/master/mxnet/doc/tutorials/python/predict_image/dog.jpg?raw=true'
 
@@ -194,22 +196,22 @@ probability=0.001720, class=n02093754 Border terrier
 ```
 
 ## Cleanup
-1.	Delete all manually created resources.
-* Delete the EC2 fleet
+1. Delete all manually created resources.
+  * Delete the EC2 fleet
 ```
 aws ec2 delete-fleets --fleet-id <$fleet-id> --terminate-instances
 ```
-* Delete the Launch template
+  * Delete the Launch template
 ```
 aws ec2 delete-launch-template --launch-template-name "EI_spot"
 ```
-2.	Delete the CloudFormation stack
+2. Delete the CloudFormation stack
 ```
 aws cloudformation delete-stack --stack-name <$stack-name>
 ```
 
 ## References
-(https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-inference.html )
+[Elastic Inference - User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-inference.html )
 
 
 
